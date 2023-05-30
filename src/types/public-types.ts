@@ -120,7 +120,11 @@ export interface StylingOption {
   arrowColor?: string;
   arrowIndent?: number;
   todayColor?: string;
-  tooltipContent?: ReactNode;
+  TooltipContent?: React.FC<{
+    task: Task;
+    fontSize: string;
+    fontFamily: string;
+  }>;
   taskListHeader?: ReactNode;
   taskListTable?: ReactNode;
 }

@@ -10,7 +10,7 @@ import { GridProps } from "../grid/grid";
 import { ganttDateRange, seedDates } from "../../helpers/date-helper";
 import { CalendarProps } from "../calendar/calendar";
 import { TaskGanttContentProps } from "./task-gantt-content";
-import { Tooltip } from "../other/tooltip";
+import { StandardTooltipContent, Tooltip } from "../other/tooltip";
 import { VerticalScroll } from "../other/vertical-scroll";
 import { TaskListProps, TaskList } from "../task-list/task-list";
 import { TaskGantt } from "./task-gantt";
@@ -53,7 +53,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   arrowIndent = 20,
   todayColor = "rgba(252, 248, 227, 0.5)",
   viewDate,
-  tooltipContent = null,
+  TooltipContent = StandardTooltipContent,
   taskListHeader = null,
   taskListTable = null,
   onDateChange,
@@ -477,7 +477,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
             task={ganttEvent.changedTask}
             headerHeight={headerHeight}
             taskListWidth={taskListWidth}
-            tooltipContent={tooltipContent}
+            TooltipContent={TooltipContent}
             rtl={rtl}
             svgWidth={svgWidth}
           />
