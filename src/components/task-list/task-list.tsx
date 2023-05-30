@@ -25,7 +25,7 @@ export const TaskList: React.FC<TaskListProps> = ({
   // headerHeight,
   // fontFamily,
   // fontSize,
-  // rowWidth,
+  rowWidth,
   // rowHeight,
   scrollY,
   // tasks,
@@ -47,7 +47,7 @@ export const TaskList: React.FC<TaskListProps> = ({
   }, [scrollY]);
 
   return (
-    <div ref={taskListRef}>
+    <div ref={taskListRef} style={{ width: rowWidth, flex: "none" }}>
       {taskListHeader}
       <div
         ref={horizontalContainerRef}
