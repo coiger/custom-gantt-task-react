@@ -10,9 +10,7 @@ import { GridProps } from "../grid/grid";
 import { ganttDateRange, seedDates } from "../../helpers/date-helper";
 import { CalendarProps } from "../calendar/calendar";
 import { TaskGanttContentProps } from "./task-gantt-content";
-import { TaskListHeaderDefault } from "../task-list/task-list-header";
-import { TaskListTableDefault } from "../task-list/task-list-table";
-import { StandardTooltipContent, Tooltip } from "../other/tooltip";
+import { Tooltip } from "../other/tooltip";
 import { VerticalScroll } from "../other/vertical-scroll";
 import { TaskListProps, TaskList } from "../task-list/task-list";
 import { TaskGantt } from "./task-gantt";
@@ -55,9 +53,9 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   arrowIndent = 20,
   todayColor = "rgba(252, 248, 227, 0.5)",
   viewDate,
-  TooltipContent = StandardTooltipContent,
-  TaskListHeader = TaskListHeaderDefault,
-  TaskListTable = TaskListTableDefault,
+  tooltipContent = null,
+  taskListHeader = null,
+  taskListTable = null,
   onDateChange,
   onProgressChange,
   onDoubleClick,
@@ -446,8 +444,8 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     taskListRef,
     setSelectedTask: handleSelectedTask,
     onExpanderClick: handleExpanderClick,
-    TaskListHeader,
-    TaskListTable,
+    taskListHeader,
+    taskListTable,
   };
   return (
     <div>
@@ -479,7 +477,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
             task={ganttEvent.changedTask}
             headerHeight={headerHeight}
             taskListWidth={taskListWidth}
-            TooltipContent={TooltipContent}
+            tooltipContent={tooltipContent}
             rtl={rtl}
             svgWidth={svgWidth}
           />

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, ReactNode } from "react";
 import { Task } from "../../types/public-types";
 import { BarTask } from "../../types/bar-task";
 import styles from "./tooltip.module.css";
@@ -17,11 +17,7 @@ export type TooltipProps = {
   rowHeight: number;
   fontSize: string;
   fontFamily: string;
-  TooltipContent: React.FC<{
-    task: Task;
-    fontSize: string;
-    fontFamily: string;
-  }>;
+  tooltipContent: ReactNode;
 };
 export const Tooltip: React.FC<TooltipProps> = ({
   task,
@@ -32,11 +28,11 @@ export const Tooltip: React.FC<TooltipProps> = ({
   scrollX,
   scrollY,
   arrowIndent,
-  fontSize,
-  fontFamily,
+  // fontSize,
+  // fontFamily,
   headerHeight,
   taskListWidth,
-  TooltipContent,
+  tooltipContent,
 }) => {
   const tooltipRef = useRef<HTMLDivElement | null>(null);
   const [relatedY, setRelatedY] = useState(0);
@@ -107,7 +103,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
       }
       style={{ left: relatedX, top: relatedY }}
     >
-      <TooltipContent task={task} fontSize={fontSize} fontFamily={fontFamily} />
+      {tooltipContent}
     </div>
   );
 };
