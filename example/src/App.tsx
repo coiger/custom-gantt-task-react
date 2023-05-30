@@ -78,6 +78,8 @@ const App = () => {
       <Gantt
         tasks={tasks}
         viewMode={view}
+        startViewDate={new Date(2023, 3, 30)}
+        endViewDate={new Date(2023, 4, 31)}
         onDateChange={handleTaskChange}
         onDelete={handleTaskDelete}
         onProgressChange={handleProgressChange}

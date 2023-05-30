@@ -86,6 +86,14 @@ export interface DisplayOption {
   viewDate?: Date;
   preStepsCount?: number;
   /**
+   * Specifies start date of chart
+   */
+  startViewDate?: Date;
+  /**
+   * Specifies end date of chart
+   */
+  endViewDate?: Date;
+  /**
    * Specifies the month name language. Able formats: ISO 639-2, Java Locale
    */
   locale?: string;

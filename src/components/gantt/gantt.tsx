@@ -31,6 +31,8 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   ganttHeight = 0,
   viewMode = ViewMode.Day,
   preStepsCount = 1,
+  startViewDate,
+  endViewDate,
   locale = "en-GB",
   barFill = 60,
   barCornerRadius = 3,
@@ -67,7 +69,18 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const taskListRef = useRef<HTMLDivElement>(null);
   const [dateSetup, setDateSetup] = useState<DateSetup>(() => {
-    const [startDate, endDate] = ganttDateRange(tasks, viewMode, preStepsCount);
+    let [startDate, endDate] = [startViewDate, endViewDate];
+
+    if (!startDate || !endDate) {
+      const [calculatedStartDate, calculatedEndDate] = ganttDateRange(
+        tasks,
+        viewMode,
+        preStepsCount
+      );
+      if (!startDate) startDate = calculatedStartDate;
+      if (!endDate) endDate = calculatedEndDate;
+    }
+
     return { viewMode, dates: seedDates(startDate, endDate, viewMode) };
   });
   const [currentViewDate, setCurrentViewDate] = useState<Date | undefined>(
@@ -105,11 +118,19 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
       filteredTasks = tasks;
     }
     filteredTasks = filteredTasks.sort(sortTasks);
-    const [startDate, endDate] = ganttDateRange(
-      filteredTasks,
-      viewMode,
-      preStepsCount
-    );
+
+    let [startDate, endDate] = [startViewDate, endViewDate];
+
+    if (!startDate || !endDate) {
+      const [calculatedStartDate, calculatedEndDate] = ganttDateRange(
+        filteredTasks,
+        viewMode,
+        preStepsCount
+      );
+      if (!startDate) startDate = calculatedStartDate;
+      if (!endDate) endDate = calculatedEndDate;
+    }
+
     let newDates = seedDates(startDate, endDate, viewMode);
     if (rtl) {
       newDates = newDates.reverse();
@@ -144,6 +165,8 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     tasks,
     viewMode,
     preStepsCount,
+    startViewDate,
+    endViewDate,
     rowHeight,
     barCornerRadius,
     columnWidth,
