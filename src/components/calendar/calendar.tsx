@@ -221,16 +221,19 @@ export const Calendar: React.FC<CalendarProps> = ({
     const dates = dateSetup.dates;
     for (let i = 0; i < dates.length; i++) {
       const date = dates[i];
-      const bottomValue = `${getLocalDayOfWeek(date, locale, "short")}, ${date
-        .getDate()
-        .toString()}`;
+      const bottomValue = date.getDate().toString();
+
+      const day = date.getDay();
+      let weekendClassName = styles.weekday;
+      if (day === 0) weekendClassName = styles.sunday;
+      else if (day === 6) weekendClassName = styles.saturday;
 
       bottomValues.push(
         <text
           key={date.getTime()}
           y={headerHeight * 0.8}
           x={columnWidth * i + columnWidth * 0.5}
-          className={styles.calendarBottomText}
+          className={`${styles.calendarBottomText} ${weekendClassName}`}
         >
           {bottomValue}
         </text>

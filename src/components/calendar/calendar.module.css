@@ -1,12 +1,23 @@
 .calendarBottomText {
   text-anchor: middle;
-  fill: #333;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
   pointer-events: none;
+}
+
+.calendarBottomText.weekday {
+  fill: #333;
+}
+
+.calendarBottomText.saturday {
+  fill: #1a73e8;
+}
+
+.calendarBottomText.sunday {
+  fill: red;
 }
 
 .calendarTopTick {
