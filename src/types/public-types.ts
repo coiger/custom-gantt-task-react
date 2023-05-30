@@ -25,6 +25,11 @@ export interface Task {
     backgroundSelectedColor?: string;
     progressColor?: string;
     progressSelectedColor?: string;
+    /**
+     * If true, row will be filled with grey color.
+     * Else, row will be filled with white color.
+     */
+    evenRow?: boolean;
   };
   isDisabled?: boolean;
   project?: string;

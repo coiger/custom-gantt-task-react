@@ -28,6 +28,9 @@ export function initTasks() {
       type: "task",
       project: "ProjectSample",
       displayOrder: 2,
+      styles: {
+        evenRow: true,
+      },
     },
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 2),

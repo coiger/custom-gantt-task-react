@@ -84,13 +84,13 @@ npm start
 
 ### DisplayOption
 
-| Parameter Name | Type    | Description                                                                                                 |
-| :------------- | :------ | :---------------------------------------------------------------------------------------------------------- |
+| Parameter Name | Type    | Description                                                                                                              |
+| :------------- | :------ | :----------------------------------------------------------------------------------------------------------------------- |
 | viewMode       | enum    | Specifies the time scale. Hour, Quarter Day, Half Day, Day, Week(ISO-8601, 1st day is Monday), Month, QuarterYear, Year. |
-| viewDate       | date    | Specifies display date and time for display.                                                                |
-| preStepsCount  | number  | Specifies empty space before the fist task                                                                  |
-| locale         | string  | Specifies the month name language. Able formats: ISO 639-2, Java Locale.                                    |
-| rtl            | boolean | Sets rtl mode.                                                                                              |
+| viewDate       | date    | Specifies display date and time for display.                                                                             |
+| preStepsCount  | number  | Specifies empty space before the fist task                                                                               |
+| locale         | string  | Specifies the month name language. Able formats: ISO 639-2, Java Locale.                                                 |
+| rtl            | boolean | Sets rtl mode.                                                                                                           |
 
 ### StylingOption
 
@@ -137,6 +137,7 @@ npm start
 |                |          | - **backgroundSelectedColor**: String. Specifies the taskbar background fill color locally on select. |
 |                |          | - **progressColor**: String. Specifies the taskbar progress fill color locally.                       |
 |                |          | - **progressSelectedColor**: String. Specifies the taskbar progress fill color globally on select.    |
+|                |          | - **evenRow**: Bool. If true, task row will be filled with grey color. Else, white color.             |
 | isDisabled     | bool     | Disables all action for current task.                                                                 |
 | fontSize       | string   | Specifies the taskbar font size locally.                                                              |
 | project        | string   | Task project name                                                                                     |

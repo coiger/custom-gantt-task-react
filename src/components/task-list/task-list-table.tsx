@@ -64,7 +64,10 @@ export const TaskListTableDefault: React.FC<{
         return (
           <div
             className={styles.taskListTableRow}
-            style={{ height: rowHeight }}
+            style={{
+              height: rowHeight,
+              backgroundColor: t.styles?.evenRow ? "#f5f5f5" : "#ffffff",
+            }}
             key={`${t.id}row`}
           >
             <div

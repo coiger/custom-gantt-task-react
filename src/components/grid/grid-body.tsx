@@ -41,7 +41,7 @@ export const GridBody: React.FC<GridBodyProps> = ({
         y={y}
         width={svgWidth}
         height={rowHeight}
-        className={styles.gridRow}
+        fill={task.styles?.evenRow ? "#f5f5f5" : "#ffffff"}
       />
     );
     rowLines.push(
