@@ -26,7 +26,10 @@ export type TaskGanttContentProps = {
   arrowIndent: number;
   fontSize: string;
   fontFamily: string;
+  fontColor: string;
+  fontWeight: number;
   rtl: boolean;
+  noArrow: boolean;
   setGanttEvent: (value: GanttEvent) => void;
   setFailedTask: (value: BarTask | null) => void;
   setSelectedTask: (taskId: string) => void;
@@ -46,7 +49,10 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = ({
   arrowIndent,
   fontFamily,
   fontSize,
+  fontColor,
+  fontWeight,
   rtl,
+  noArrow,
   setGanttEvent,
   setFailedTask,
   setSelectedTask,
@@ -262,23 +268,25 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = ({
 
   return (
     <g className="content">
-      <g className="arrows" fill={arrowColor} stroke={arrowColor}>
-        {tasks.map(task => {
-          return task.barChildren.map(child => {
-            return (
-              <Arrow
-                key={`Arrow from ${task.id} to ${tasks[child.index].id}`}
-                taskFrom={task}
-                taskTo={tasks[child.index]}
-                rowHeight={rowHeight}
-                taskHeight={taskHeight}
-                arrowIndent={arrowIndent}
-                rtl={rtl}
-              />
-            );
-          });
-        })}
-      </g>
+      {!noArrow && (
+        <g className="arrows" fill={arrowColor} stroke={arrowColor}>
+          {tasks.map(task => {
+            return task.barChildren.map(child => {
+              return (
+                <Arrow
+                  key={`Arrow from ${task.id} to ${tasks[child.index].id}`}
+                  taskFrom={task}
+                  taskTo={tasks[child.index]}
+                  rowHeight={rowHeight}
+                  taskHeight={taskHeight}
+                  arrowIndent={arrowIndent}
+                  rtl={rtl}
+                />
+              );
+            });
+          })}
+        </g>
+      )}
       <g className="bar" fontFamily={fontFamily} fontSize={fontSize}>
         {tasks.map(task => {
           return (
@@ -293,6 +301,8 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = ({
               key={task.id}
               isSelected={!!selectedTask && task.id === selectedTask.id}
               rtl={rtl}
+              fontColor={fontColor}
+              fontWeight={fontWeight}
             />
           );
         })}

@@ -16,6 +16,8 @@ export type TaskItemProps = {
   isDelete: boolean;
   isSelected: boolean;
   rtl: boolean;
+  fontColor: string;
+  fontWeight: number;
   onEventStart: (
     action: GanttContentMoveAction,
     selectedTask: BarTask,
@@ -31,6 +33,8 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
     taskHeight,
     isSelected,
     rtl,
+    fontColor,
+    fontWeight,
     onEventStart,
   } = {
     ...props,
@@ -111,11 +115,9 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
       <text
         x={getX()}
         y={task.y + taskHeight * 0.5}
-        className={
-          isTextInside
-            ? style.barLabel
-            : style.barLabel && style.barLabelOutside
-        }
+        fill={fontColor}
+        fontWeight={fontWeight}
+        className={isTextInside ? style.barLabel : style.barLabelOutside}
         ref={textRef}
       >
         {task.name}
