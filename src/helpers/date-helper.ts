@@ -146,9 +146,12 @@ export const seedDates = (
   endDate: Date,
   viewMode: ViewMode
 ) => {
-  let currentDate: Date = new Date(startDate);
-  const dates: Date[] = [currentDate];
+  const dates: Date[] = [];
+
+  let currentDate: Date = startDate;
   while (currentDate < endDate) {
+    dates.push(currentDate);
+
     switch (viewMode) {
       case ViewMode.Year:
         currentDate = addToDate(currentDate, 1, "year");
@@ -175,8 +178,8 @@ export const seedDates = (
         currentDate = addToDate(currentDate, 1, "hour");
         break;
     }
-    dates.push(currentDate);
   }
+
   return dates;
 };
 
