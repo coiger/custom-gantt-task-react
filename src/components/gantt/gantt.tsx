@@ -372,6 +372,24 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
         event.preventDefault();
         newScrollX += columnWidth;
         break;
+      case "PageDown":
+        event.preventDefault();
+        newScrollY = ganttFullHeight - ganttHeight;
+        isX = false;
+        break;
+      case "PageUp":
+        event.preventDefault();
+        newScrollY = 0;
+        isX = false;
+        break;
+      case "Home":
+        event.preventDefault();
+        newScrollX = 0;
+        break;
+      case "End":
+        event.preventDefault();
+        newScrollX = svgWidth;
+        break;
     }
     if (isX) {
       if (newScrollX < 0) {
