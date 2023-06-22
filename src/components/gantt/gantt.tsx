@@ -112,6 +112,10 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   const [scrollX, setScrollX] = useState(-1);
   const [ignoreScrollEvent, setIgnoreScrollEvent] = useState(false);
 
+  const endOfScrollX =
+    svgWidth - ((wrapperRef?.current?.clientWidth ?? 0) - taskListWidth);
+  const endOfScrollY = ganttFullHeight - ganttHeight;
+
   // task change events
   useEffect(() => {
     let filteredTasks: Task[];
@@ -283,21 +287,18 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     const handleWheel = (event: WheelEvent) => {
       if (event.shiftKey || event.deltaX) {
         const scrollMove = event.deltaX ? event.deltaX : event.deltaY;
+
         let newScrollX = scrollX + scrollMove;
-        if (newScrollX < 0) {
-          newScrollX = 0;
-        } else if (newScrollX > svgWidth) {
-          newScrollX = svgWidth;
-        }
+        if (newScrollX < 0) newScrollX = 0;
+        else if (newScrollX > endOfScrollX) newScrollX = endOfScrollX;
+
         setScrollX(newScrollX);
         event.preventDefault();
       } else if (ganttHeight) {
         let newScrollY = scrollY + event.deltaY;
-        if (newScrollY < 0) {
-          newScrollY = 0;
-        } else if (newScrollY > ganttFullHeight - ganttHeight) {
-          newScrollY = ganttFullHeight - ganttHeight;
-        }
+        if (newScrollY < 0) newScrollY = 0;
+        else if (newScrollY > endOfScrollY) newScrollY = endOfScrollY;
+
         if (newScrollY !== scrollY) {
           setScrollY(newScrollY);
           event.preventDefault();
@@ -346,6 +347,8 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
    * Handles arrow keys events and transform it to new scroll
    */
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (wrapperRef.current?.clientWidth === undefined) return;
+
     let newScrollY = scrollY;
     let newScrollX = scrollX;
     let isX = true;
@@ -374,7 +377,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
         break;
       case "PageDown":
         event.preventDefault();
-        newScrollY = ganttFullHeight - ganttHeight;
+        newScrollY = endOfScrollY;
         isX = false;
         break;
       case "PageUp":
@@ -388,24 +391,20 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
         break;
       case "End":
         event.preventDefault();
-        newScrollX = svgWidth;
+        newScrollX = endOfScrollX;
         break;
     }
+
     if (isX) {
-      if (newScrollX < 0) {
-        newScrollX = 0;
-      } else if (newScrollX > svgWidth) {
-        newScrollX = svgWidth;
-      }
+      if (newScrollX < 0) newScrollX = 0;
+      else if (newScrollX > endOfScrollX) newScrollX = endOfScrollX;
       setScrollX(newScrollX);
     } else {
-      if (newScrollY < 0) {
-        newScrollY = 0;
-      } else if (newScrollY > ganttFullHeight - ganttHeight) {
-        newScrollY = ganttFullHeight - ganttHeight;
-      }
+      if (newScrollY < 0) newScrollY = 0;
+      else if (newScrollY > endOfScrollY) newScrollY = endOfScrollY;
       setScrollY(newScrollY);
     }
+
     setIgnoreScrollEvent(true);
   };
 
