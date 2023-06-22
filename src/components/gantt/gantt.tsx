@@ -346,27 +346,30 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
    * Handles arrow keys events and transform it to new scroll
    */
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    event.preventDefault();
     let newScrollY = scrollY;
     let newScrollX = scrollX;
     let isX = true;
     switch (event.key) {
       case "Down": // IE/Edge specific value
       case "ArrowDown":
+        event.preventDefault();
         newScrollY += rowHeight;
         isX = false;
         break;
       case "Up": // IE/Edge specific value
       case "ArrowUp":
+        event.preventDefault();
         newScrollY -= rowHeight;
         isX = false;
         break;
       case "Left":
       case "ArrowLeft":
+        event.preventDefault();
         newScrollX -= columnWidth;
         break;
       case "Right": // IE/Edge specific value
       case "ArrowRight":
+        event.preventDefault();
         newScrollX += columnWidth;
         break;
     }
