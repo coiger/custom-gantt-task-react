@@ -91,7 +91,6 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   );
 
   const [taskListWidth, setTaskListWidth] = useState(0);
-  const [svgContainerWidth, setSvgContainerWidth] = useState(0);
   const [svgContainerHeight, setSvgContainerHeight] = useState(ganttHeight);
   const [barTasks, setBarTasks] = useState<BarTask[]>([]);
   const [ganttEvent, setGanttEvent] = useState<GanttEvent>({
@@ -267,12 +266,6 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
       setTaskListWidth(taskListRef.current.offsetWidth);
     }
   }, [taskListRef, listCellWidth]);
-
-  useEffect(() => {
-    if (wrapperRef.current) {
-      setSvgContainerWidth(wrapperRef.current.offsetWidth - taskListWidth);
-    }
-  }, [wrapperRef, taskListWidth]);
 
   useEffect(() => {
     if (ganttHeight) {
@@ -513,12 +506,12 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
           scrollY={scrollY}
           scrollX={scrollX}
         />
-        {ganttEvent.changedTask && (
+        {wrapperRef.current && ganttEvent.changedTask && (
           <Tooltip
             arrowIndent={arrowIndent}
             rowHeight={rowHeight}
             svgContainerHeight={svgContainerHeight}
-            svgContainerWidth={svgContainerWidth}
+            svgContainerWidth={wrapperRef.current.offsetWidth - taskListWidth}
             fontFamily={fontFamily}
             fontSize={fontSize}
             scrollX={scrollX}
